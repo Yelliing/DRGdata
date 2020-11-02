@@ -1,0 +1,28 @@
+#' DRG.statistics
+#'
+#' This function produces a statistic value feedback
+#'
+#' @param df Default dataset to use for statistical analysis
+#' @param func a function for the type of statistical value to return. "mean" returns
+#' the mean value; "median" returns the median; "sd" returns the standard deviation
+#' the default is "mean"
+#'
+#' @return A value of mean, median or standard deviation based on the user input
+#' @export
+#'
+#' @importFrom knitr kable
+#'
+#' @examples
+#' DRG.statistics(DRG_data, "mean")
+#'
+DRG.statistics <- function(df, func) {
+  newData <- df %>% mutate(DRGcode = substr(DRG.Definition, 1,3))
+  result <- newData %>%
+    select(DRGcode, Average.Medicare.Payments)%>%
+    group_by(DRGcode)%>%
+    summarise(across(.fns = func)) %>%
+    rename(Result = "Average.Medicare.Payments")%>%
+    kable(caption = "Medicare Payment Statistics")
+  return(result)
+
+}
