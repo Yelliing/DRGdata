@@ -13,16 +13,21 @@
 #' @importFrom knitr kable
 #'
 #' @examples
-#' DRG.statistics(DRG_data, "mean")
+#' DRG.statistics(DRG_data, mean)
 #'
-DRG.statistics <- function(df, func) {
+DRG.statistics <- function(df, func = mean) {
+  # subtract DRG code from dataset
   newData <- df %>% mutate(DRGcode = substr(DRG.Definition, 1,3))
   result <- newData %>%
+    # select only columns of interest
     select(DRGcode, Average.Medicare.Payments)%>%
+    # group by variable to generate results
     group_by(DRGcode)%>%
+    # summarize all columns by the input function
     summarise(across(.fns = func)) %>%
+    # rename the column name to result
     rename(Result = "Average.Medicare.Payments")%>%
+    #generate a table with the result
     kable(caption = "Medicare Payment Statistics")
   return(result)
-
 }

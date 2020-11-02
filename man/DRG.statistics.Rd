@@ -4,7 +4,7 @@
 \alias{DRG.statistics}
 \title{DRG.statistics}
 \usage{
-DRG.statistics(df, func)
+DRG.statistics(df, func = mean)
 }
 \arguments{
 \item{df}{Default dataset to use for statistical analysis}
@@ -20,6 +20,6 @@ A value of mean, median or standard deviation based on the user input
 This function produces a statistic value feedback
 }
 \examples{
-DRG.statistics(DRG_data, "mean")
+DRG.statistics(DRG_data, mean)
 
 }
