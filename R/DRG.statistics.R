@@ -28,6 +28,6 @@ DRG.statistics <- function(df, func = mean) {
     # rename the column name to result
     rename(Result = "Average.Medicare.Payments")%>%
     #generate a table with the result
-    kable(caption = "Medicare Payment Statistics")
+    kable(caption = "Medicare Payment Statistical Analysis")
   return(result)
 }
